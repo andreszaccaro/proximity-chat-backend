@@ -2,13 +2,18 @@
   "name": "proximity-chat-backend",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "12.16.1"
+  },
   "scripts": {
-    "build": "nest build",
+    "build": "nest build && prisma generate",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main"
+    "start:prod": "node dist/main",
+    "prisma:generate": "npx prisma generate",
+    "postinstall": "npm run prisma:generate"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.5",
@@ -16,6 +21,8 @@
     "@nestjs/core": "^7.6.5",
     "@nestjs/graphql": "^7.9.4",
     "@nestjs/platform-express": "^7.6.5",
+    "@prisma/cli": "^2.14.0",
+    "@prisma/client": "^2.14.0",
     "apollo-server-express": "^2.19.1",
     "graphql": "^15.4.0",
     "graphql-subscriptions": "^1.1.0",
