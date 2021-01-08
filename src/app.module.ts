@@ -8,6 +8,7 @@ import { PubSubModule } from './resolvers/pubSub/pubSub.module';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     GraphQLModule.forRoot({
+      playground: true,
       typePaths: ['src/**/*.graphql'],
       installSubscriptionHandlers: true,
       context: ({ req }) => ({ req }),
