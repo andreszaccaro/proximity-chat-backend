@@ -1,0 +1,13 @@
+type Room {
+  id: ID!
+  users: [User!]
+}
+
+type Query {
+  rooms: [Room!]
+}
+
+type Mutation {
+  createRoom: Room!
+  sendMessage(roomId: String!, message: String!): Response!
+}
