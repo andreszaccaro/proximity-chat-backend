@@ -1,3 +1,7 @@
 type Response {
   response: String
 }
+
+enum SubscriptionType {
+  ROOM_USERS
+}

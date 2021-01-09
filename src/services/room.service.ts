@@ -1,11 +1,17 @@
-import { Injectable, ConflictException } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { PubSubEngine } from 'graphql-subscriptions';
 
 import { PrismaService } from './prisma.service';
-import { Room } from '../graphql.typings';
+import { UserService } from './user.service';
+import { Room, SubscriptionType } from '../graphql.typings';
 
 @Injectable()
 export class RoomService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    @Inject('PUB_SUB') private pubSub: PubSubEngine,
+    private readonly prisma: PrismaService,
+    private readonly user: UserService,
+  ) {}
 
   async create(): Promise<any> {
     const room = await this.prisma.room.create({
@@ -21,5 +27,18 @@ export class RoomService {
     });
 
     return room;
+  }
+
+  async sendMessage(userId: string, message: string): Promise<any> {
+    console.log('userId', userId);
+    const user = await this.user.update(userId, message);
+
+    console.log('user', user);
+
+    this.pubSub.publish(SubscriptionType.ROOM_USERS, { roomUsers: user });
+
+    return {
+      response: 'Message sent successfully.',
+    };
   }
 }

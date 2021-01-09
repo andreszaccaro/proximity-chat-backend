@@ -6,6 +6,10 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export enum SubscriptionType {
+    ROOM_USERS = "ROOM_USERS"
+}
+
 export class Response {
     response?: string;
 }
@@ -22,13 +26,18 @@ export abstract class IQuery {
 export abstract class IMutation {
     abstract createRoom(): Room | Promise<Room>;
 
-    abstract sendMessage(roomId: string, message: string): Response | Promise<Response>;
+    abstract sendMessage(userId: string, message: string): Response | Promise<Response>;
 
     abstract createUser(roomId: string, name: string): User | Promise<User>;
+}
+
+export abstract class ISubscription {
+    abstract roomUsers(roomId: string): Room | Promise<Room>;
 }
 
 export class User {
     id: string;
     room: Room;
     name?: string;
+    lastMessage?: string;
 }

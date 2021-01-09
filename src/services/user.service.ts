@@ -20,4 +20,16 @@ export class UserService {
 
     return user;
   }
+
+  async update(userId: string, lastMessage: string): Promise<any> {
+    const user = this.prisma.user.update({
+      where: { id: userId },
+      data: {
+        lastMessage,
+      },
+      include: { room: true },
+    });
+
+    return user;
+  }
 }

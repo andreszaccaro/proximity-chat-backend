@@ -9,5 +9,9 @@ type Query {
 
 type Mutation {
   createRoom: Room!
-  sendMessage(roomId: String!, message: String!): Response!
+  sendMessage(userId: String!, message: String!): Response!
+}
+
+type Subscription {
+  roomUsers(roomId: String!): Room!
 }
