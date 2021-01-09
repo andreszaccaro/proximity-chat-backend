@@ -22,10 +22,11 @@ export class RoomService {
   }
 
   async findUnique(roomId: string): Promise<any> {
-    const room = await this.prisma.room.findUnique({
-      where: { id: roomId },
-      include: { users: true },
-    });
+    const room = await this.prisma.room
+      .findUnique({
+        where: { id: roomId },
+      })
+      .users();
 
     return room;
   }
@@ -39,10 +40,7 @@ export class RoomService {
   }
 
   async sendMessage(userId: string, message: string): Promise<any> {
-    console.log('userId', userId);
     const user = await this.user.update(userId, message);
-
-    console.log('user', user);
 
     this.pubSub.publish(SubscriptionType.ROOM_USERS, { roomUsers: user });
 
