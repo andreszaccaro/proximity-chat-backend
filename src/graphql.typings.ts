@@ -32,7 +32,7 @@ export abstract class IMutation {
 }
 
 export abstract class ISubscription {
-    abstract roomUsers(roomId: string): Room | Promise<Room>;
+    abstract roomUsers(roomId: string): User | Promise<User>;
 }
 
 export class User {

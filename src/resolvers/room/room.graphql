@@ -13,5 +13,5 @@ type Mutation {
 }
 
 type Subscription {
-  roomUsers(roomId: String!): Room!
+  roomUsers(roomId: String!): User!
 }

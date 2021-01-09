@@ -27,7 +27,6 @@ export class UserService {
       data: {
         lastMessage,
       },
-      include: { room: true },
     });
 
     return user;

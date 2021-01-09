@@ -24,15 +24,15 @@ export class RoomResolver {
 
   @Mutation()
   async sendMessage(
-    @Args() userId: string,
-    @Args() message: string,
+    @Args('userId') userId: string,
+    @Args('message') message: string,
   ): Promise<any> {
     return this.room.sendMessage(userId, message);
   }
 
   @Subscription('roomUsers', {
     filter: (payload, variables) =>
-      payload.roomUsers.user.room.id === variables.roomId,
+      payload.roomUsers.roomId === variables.roomId,
   })
   roomUsers() {
     return this.pubSub.asyncIterator(SubscriptionType.ROOM_USERS);
