@@ -21,6 +21,15 @@ export class RoomService {
     return room;
   }
 
+  async findUnique(roomId: string): Promise<any> {
+    const room = await this.prisma.room.findUnique({
+      where: { id: roomId },
+      include: { users: true },
+    });
+
+    return room;
+  }
+
   async findMany(): Promise<any> {
     const room = await this.prisma.room.findMany({
       include: { users: true },

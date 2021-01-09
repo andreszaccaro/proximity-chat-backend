@@ -20,6 +20,8 @@ export class Room {
 }
 
 export abstract class IQuery {
+    abstract room(roomId: string): Room | Promise<Room>;
+
     abstract rooms(): Room[] | Promise<Room[]>;
 }
 

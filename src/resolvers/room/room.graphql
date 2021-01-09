@@ -4,6 +4,7 @@ type Room {
 }
 
 type Query {
+  room(roomId: String!): Room!
   rooms: [Room!]
 }
 

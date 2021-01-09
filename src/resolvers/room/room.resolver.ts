@@ -9,17 +9,22 @@ import { SubscriptionType } from '../../graphql.typings';
 export class RoomResolver {
   constructor(
     @Inject('PUB_SUB') private pubSub: PubSubEngine,
-    private room: RoomService,
+    private roomService: RoomService,
   ) {}
 
   @Query()
+  room(@Args('roomId') roomId: string): Promise<any> {
+    return this.roomService.findUnique(roomId);
+  }
+
+  @Query()
   rooms(): Promise<any> {
-    return this.room.findMany();
+    return this.roomService.findMany();
   }
 
   @Mutation()
   createRoom(): Promise<any> {
-    return this.room.create();
+    return this.roomService.create();
   }
 
   @Mutation()
@@ -27,7 +32,7 @@ export class RoomResolver {
     @Args('userId') userId: string,
     @Args('message') message: string,
   ): Promise<any> {
-    return this.room.sendMessage(userId, message);
+    return this.roomService.sendMessage(userId, message);
   }
 
   @Subscription('roomUsers', {
