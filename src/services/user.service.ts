@@ -32,7 +32,7 @@ export class UserService {
     positionX: number,
     positionY: number,
   ): Promise<any> {
-    const user = this.prisma.user.update({
+    const user = await this.prisma.user.update({
       where: { id: userId },
       data: {
         lastMessage: message !== null ? message : undefined,
