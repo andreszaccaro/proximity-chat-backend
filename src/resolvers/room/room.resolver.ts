@@ -27,14 +27,6 @@ export class RoomResolver {
     return this.roomService.create();
   }
 
-  @Mutation()
-  async sendMessage(
-    @Args('userId') userId: string,
-    @Args('message') message: string,
-  ): Promise<any> {
-    return this.roomService.sendMessage(userId, message);
-  }
-
   @Subscription('roomUsers', {
     filter: (payload, variables) =>
       payload.roomUsers.roomId === variables.roomId,

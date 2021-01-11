@@ -2,9 +2,17 @@ type User {
   id: ID!
   room: Room!
   name: String
+  positionX: Int!
+  positionY: Int!
   lastMessage: String
 }
 
 type Mutation {
   createUser(roomId: String!, name: String!): User!
+  updateUser(
+    userId: String!
+    message: String
+    positionX: Int
+    positionY: Int
+  ): User!
 }

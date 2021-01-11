@@ -13,4 +13,14 @@ export class UserResolver {
   ): Promise<any> {
     return this.user.create(roomId, name);
   }
+
+  @Mutation()
+  async updateUser(
+    @Args('userId') userId: string,
+    @Args('message') message: string,
+    @Args('positionX') positionX: number,
+    @Args('positionY') positionY: number,
+  ): Promise<any> {
+    return this.user.update(userId, message, positionX, positionY);
+  }
 }

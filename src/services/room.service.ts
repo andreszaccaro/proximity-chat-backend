@@ -38,14 +38,4 @@ export class RoomService {
 
     return room;
   }
-
-  async sendMessage(userId: string, message: string): Promise<any> {
-    const user = await this.user.update(userId, message);
-
-    this.pubSub.publish(SubscriptionType.ROOM_USERS, { roomUsers: user });
-
-    return {
-      response: 'Message sent successfully.',
-    };
-  }
 }

@@ -26,13 +26,22 @@ export class UserService {
     return user;
   }
 
-  async update(userId: string, lastMessage: string): Promise<any> {
+  async update(
+    userId: string,
+    message: string,
+    positionX: number,
+    positionY: number,
+  ): Promise<any> {
     const user = this.prisma.user.update({
       where: { id: userId },
       data: {
-        lastMessage,
+        lastMessage: message !== null ? message : undefined,
+        positionX: positionX !== null ? positionX : undefined,
+        positionY: positionY !== null ? positionY : undefined,
       },
     });
+
+    this.pubSub.publish(SubscriptionType.ROOM_USERS, { roomUsers: user });
 
     return user;
   }

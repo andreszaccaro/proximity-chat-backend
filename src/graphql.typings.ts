@@ -28,9 +28,9 @@ export abstract class IQuery {
 export abstract class IMutation {
     abstract createRoom(): Room | Promise<Room>;
 
-    abstract sendMessage(userId: string, message: string): Response | Promise<Response>;
-
     abstract createUser(roomId: string, name: string): User | Promise<User>;
+
+    abstract updateUser(userId: string, message?: string, positionX?: number, positionY?: number): User | Promise<User>;
 }
 
 export abstract class ISubscription {
@@ -41,5 +41,7 @@ export class User {
     id: string;
     room: Room;
     name?: string;
+    positionX: number;
+    positionY: number;
     lastMessage?: string;
 }
