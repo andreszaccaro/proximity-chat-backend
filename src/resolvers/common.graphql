@@ -4,4 +4,5 @@ type Response {
 
 enum SubscriptionType {
   ROOM_USERS
+  NEW_ROOM
 }

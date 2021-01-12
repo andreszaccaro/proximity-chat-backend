@@ -19,6 +19,7 @@ export class UserService {
         },
         name,
       },
+      include: { room: true },
     });
 
     this.pubSub.publish(SubscriptionType.ROOM_USERS, { roomUsers: user });

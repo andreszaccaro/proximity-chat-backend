@@ -4,7 +4,7 @@ import { uniqueNamesGenerator, colors, animals } from 'unique-names-generator';
 
 import { PrismaService } from './prisma.service';
 import { UserService } from './user.service';
-import { Room } from '../graphql.typings';
+import { Room, SubscriptionType } from '../graphql.typings';
 
 @Injectable()
 export class RoomService {
@@ -25,6 +25,8 @@ export class RoomService {
       },
       include: { users: true },
     });
+
+    this.pubSub.publish(SubscriptionType.NEW_ROOM, { newRoom: room });
 
     return room;
   }

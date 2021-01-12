@@ -34,4 +34,9 @@ export class RoomResolver {
   roomUsers() {
     return this.pubSub.asyncIterator(SubscriptionType.ROOM_USERS);
   }
+
+  @Subscription('newRoom')
+  newRoom() {
+    return this.pubSub.asyncIterator(SubscriptionType.NEW_ROOM);
+  }
 }

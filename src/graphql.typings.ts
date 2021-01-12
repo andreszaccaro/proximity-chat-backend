@@ -7,7 +7,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export enum SubscriptionType {
-    ROOM_USERS = "ROOM_USERS"
+    ROOM_USERS = "ROOM_USERS",
+    NEW_ROOM = "NEW_ROOM"
 }
 
 export class Response {
@@ -36,6 +37,8 @@ export abstract class IMutation {
 
 export abstract class ISubscription {
     abstract roomUsers(roomId: string): User | Promise<User>;
+
+    abstract newRoom(): Room | Promise<Room>;
 }
 
 export class User {
