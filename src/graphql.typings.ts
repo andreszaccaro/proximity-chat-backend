@@ -16,6 +16,7 @@ export class Response {
 
 export class Room {
     id: string;
+    name: string;
     users?: User[];
 }
 

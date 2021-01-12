@@ -1,9 +1,10 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { PubSubEngine } from 'graphql-subscriptions';
+import { uniqueNamesGenerator, colors, animals } from 'unique-names-generator';
 
 import { PrismaService } from './prisma.service';
 import { UserService } from './user.service';
-import { Room, SubscriptionType } from '../graphql.typings';
+import { Room } from '../graphql.typings';
 
 @Injectable()
 export class RoomService {
@@ -14,10 +15,17 @@ export class RoomService {
   ) {}
 
   async create(): Promise<any> {
+    const randomName: string = uniqueNamesGenerator({
+      dictionaries: [colors, animals],
+    });
+
     const room = await this.prisma.room.create({
-      data: {},
+      data: {
+        name: randomName,
+      },
       include: { users: true },
     });
+
     return room;
   }
 
